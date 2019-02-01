@@ -1,0 +1,544 @@
+$inputXML= @"
+<Window x:Class="Powershell_Control_Panel.MainWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:local="clr-namespace:Powershell_Control_Panel"
+       mc:Ignorable="d"
+       Title="Accounts Control Panel" Height="614.706" Width="1155.803">
+    <Grid Margin="0,0,-4,-2" Background="#FF404042">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="121*"/>
+            <RowDefinition Height="467*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="367*"/>
+            <ColumnDefinition Width="367*"/>
+            <ColumnDefinition Width="367*"/>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="465" Grid.Row="1" VerticalAlignment="Top" Width="414" Grid.ColumnSpan="3"/>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="465" Grid.Row="1" VerticalAlignment="Top" Width="369"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="465" Grid.Row="1" VerticalAlignment="Top" Width="369">
+            <Button 
+                x:Name="SharedMbx" Content="Add User To Shared &#xD;&#xA;Mailbox" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="140" Margin="206,310,0,0">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+        </Border>
+        <Label x:Name="Account_Scripts" Content="Account Scripts" HorizontalAlignment="Center" Height="56" Margin="57,60,21,5" VerticalAlignment="Center" Width="289" RenderTransformOrigin="0.68,0.533" FontSize="36" FontFamily="Segoe UI Semibold" FontWeight="Bold" Foreground="#f61d1d"/>
+        <Label x:Name="Info_Scripts" Content="Information Scripts" HorizontalAlignment="Center" Height="56" Margin="21,60,14,5" VerticalAlignment="Center" Width="332" RenderTransformOrigin="0.68,0.533" FontSize="36" FontFamily="Segoe UI Semibold" FontWeight="Bold" Foreground="#f61d1d" Grid.Column="1"/>
+        <Label x:Name="Misc_Scripts" Content="Misc Scripts" HorizontalAlignment="Center" Height="56" Margin="67,60,10,5" VerticalAlignment="Center" Width="332" RenderTransformOrigin="0.68,0.533" FontSize="36" FontFamily="Segoe UI Semibold" FontWeight="Bold" Foreground="#f61d1d" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <Button 
+            x:Name="DisableAcc" Content="Disable Account" HorizontalAlignment="Left" Height="45" Margin="21,30,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="EnableAcc" Content="Enable Account" HorizontalAlignment="Left" Height="45" Margin="21,100,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="AccountExp" Content="Set Account Expiry " HorizontalAlignment="Left" Height="45" Margin="21,170,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="button_Copy2" Content="" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="140" Grid.Column="2" Grid.Row="1" Margin="112,30,0,0" Background="#FF82ACAE">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="button_Copy3" Content="" HorizontalAlignment="Left" Height="45" Margin="112,100,0,0" VerticalAlignment="Top" Width="140" Grid.Column="2" Grid.Row="1" Background="#FF82ACAE">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="button_Copy4" Content="" HorizontalAlignment="Left" Height="45" Margin="112,170,0,0" VerticalAlignment="Top" Width="140" Grid.Column="2" Grid.Row="1" Background="#FF82ACAE">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="AccountChange" Content="Account Name Change" HorizontalAlignment="Left" Height="45" Margin="21,240,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="AccountInfo" Content="Account Information" HorizontalAlignment="Left" Height="45" Margin="21,310,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="GetCOmpInfo" Content="Get Computer &#xD;&#xA;Information" HorizontalAlignment="Left" Height="45" Margin="21,30,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1" Grid.Column="1" Background="#FF8F8E7C">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="CheckMSLicenses" Content="Check Microsoft &#xD;&#xA;Licenses" HorizontalAlignment="Left" Height="45" Margin="21,100,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1" Grid.Column="1" Background="#FF8F8E7C">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="MbxGUID" Content="Get Mailbox GUID" HorizontalAlignment="Left" Height="45" Margin="21,170,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1" Grid.Column="1" Background="#FF8F8E7C">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="EmptyGrps" Content="Find Empty Groups" HorizontalAlignment="Left" Height="45" Margin="21,240,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1" Grid.Column="1" Background="#FF8F8E7C">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="GrpMembers" Content="Get Members of a Group" HorizontalAlignment="Left" Height="45" Margin="21,310,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1" Grid.Column="1" Background="#FF8F8E7C">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="ImportAccsGrp" Content="Import Accounts to &#xA;Group" HorizontalAlignment="Left" Height="45" Margin="21,380,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1" Grid.Column="1" Background="#FF8F8E7C">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button 
+            x:Name="Exit" Content="Exit" HorizontalAlignment="Left" Height="45" Margin="262,412,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button 
+            x:Name="ResetPW" Content="Reset Password" HorizontalAlignment="Left" Height="45" Margin="206,30,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button 
+            x:Name="UnlockAcc" Content="Unlock Account" HorizontalAlignment="Left" Height="45" Margin="206,100,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button 
+            x:Name="CheckLock" Content="Check All Locked &#xA;Accounts" HorizontalAlignment="Left" Height="45" Margin="206,170,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button 
+            x:Name="Leavers" Content="Leavers" HorizontalAlignment="Left" Height="45" Margin="206,240,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="Getmanager" Content="Get User Manager" HorizontalAlignment="Left" Height="45" Margin="206,30,0,0" VerticalAlignment="Top" Width="140" Grid.Row="1" Grid.Column="1" Background="#FF8F8E7C">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="button_Copy19" Content="" HorizontalAlignment="Left" Height="45" Margin="112,240,0,0" VerticalAlignment="Top" Width="140" Grid.Column="2" Grid.Row="1" Background="#FF82ACAE">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="button_Copy20" Content="" HorizontalAlignment="Left" Height="45" Margin="112,310,0,0" VerticalAlignment="Top" Width="140" Grid.Column="2" Grid.Row="1" Background="#FF82ACAE">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Image x:Name="image" Source="Enter URL here"/>
+        <Border BorderBrush="Black" BorderThickness="3" HorizontalAlignment="Left" Height="121" VerticalAlignment="Top" Width="369"/>
+        <Border BorderBrush="Black" BorderThickness="3" Grid.Column="1" HorizontalAlignment="Left" Height="121" VerticalAlignment="Top" Width="369"/>
+        <Border BorderBrush="Black" BorderThickness="3" Grid.Column="2" HorizontalAlignment="Left" Height="121" VerticalAlignment="Top" Width="414" Grid.ColumnSpan="3"/>
+    </Grid>
+</Window>
+"@
+Import-Module activedirectory
+Connect-MsolService
+$inputXML = $inputXML -replace 'mc:Ignorable="d"','' -replace "x:N",'N'  -replace '^<Win.*', '<Window'
+ 
+[void][System.Reflection.Assembly]::LoadWithPartialName('presentationframework')
+[xml]$XAML = $inputXML
+#Read XAML
+ 
+    $reader=(New-Object System.Xml.XmlNodeReader $xaml)
+  try{$Form=[Windows.Markup.XamlReader]::Load( $reader )}
+catch{Write-Host "Unable to load Windows.Markup.XamlReader. Double-check syntax and ensure .net is installed."}
+
+#===========================================================================
+# Load XAML Objects In PowerShell
+#===========================================================================
+ 
+$xaml.SelectNodes("//*[@Name]") | %{Set-Variable -Name "WPF$($_.Name)" -Value $Form.FindName($_.Name)}
+ 
+#============================================================================================================
+#ACCOUNT SCRIPTS
+#============================================================================================================
+
+#===========================================================================
+# Disable Account
+#===========================================================================
+$WPFDisableAcc.Add_Click({
+
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') | Out-Null
+$DisableAcc= [Microsoft.VisualBasic.Interaction]::InputBox("Enter a user name", "Name", "$env:username")
+
+Disable-ADAccount $DisableAcc
+write-host "User Now Set to Disable"
+#Get-MsolUser -UserPrincipalName $Name
+Clear-Variable * -ErrorAction SilentlyContinue
+})
+
+#===========================================================================
+# Reset Password
+#===========================================================================
+$WPFResetPW.Add_Click({
+
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') | Out-Null
+$Name= [Microsoft.VisualBasic.Interaction]::InputBox("Enter a user name", "Name", "$env:username")
+
+[void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing") 
+[void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") 
+
+$objForm = New-Object System.Windows.Forms.Form 
+$objForm.Text = "Password Reset"
+$objForm.Size = New-Object System.Drawing.Size(300,200) 
+$objForm.StartPosition = "CenterScreen"
+
+$objForm.KeyPreview = $True
+$objForm.Add_KeyDown({if ($_.KeyCode -eq "Enter") 
+    {$x=$objTextBox.Text;$objForm.Close()}})
+$objForm.Add_KeyDown({if ($_.KeyCode -eq "Escape") 
+    {$objForm.Close()}})
+
+$OKButton = New-Object System.Windows.Forms.Button
+$OKButton.Location = New-Object System.Drawing.Size(75,120)
+$OKButton.Size = New-Object System.Drawing.Size(75,23)
+$OKButton.Text = "OK"
+$OKButton.Add_Click({$Script:Password=$objTextBox.Text;$objForm.Close()})
+$objForm.Controls.Add($OKButton)
+
+$CancelButton = New-Object System.Windows.Forms.Button
+$CancelButton.Location = New-Object System.Drawing.Size(150,120)
+$CancelButton.Size = New-Object System.Drawing.Size(75,23)
+$CancelButton.Text = "Cancel"
+$CancelButton.Add_Click({$objForm.Close()})
+$objForm.Controls.Add($CancelButton)
+
+$objLabel = New-Object System.Windows.Forms.Label
+$objLabel.Location = New-Object System.Drawing.Size(10,20) 
+$objLabel.Size = New-Object System.Drawing.Size(280,20) 
+$objLabel.Text = "Pleas enter the new password:"
+$objForm.Controls.Add($objLabel) 
+
+$objTextBox = New-Object System.Windows.Forms.TextBox 
+$objTextBox.Location = New-Object System.Drawing.Size(10,40) 
+$objTextBox.Size = New-Object System.Drawing.Size(260,20) 
+$objForm.Controls.Add($objTextBox) 
+
+$objForm.Topmost = $True
+
+$objForm.Add_Shown({$objForm.Activate()})
+[void] $objForm.ShowDialog()
+          
+Set-ADAccountPassword -Identity $Name -Reset -NewPassword (ConvertTo-SecureString -AsPlainText $Password -Force) -Server "########Domain########"
+#Set-ADAccountPassword -Server "########Domain########" $Script:Username -NewPassword $Script:Password –Reset -Force
+Set-aduser $Name -changepasswordatlogon $true
+Clear-Variable * -ErrorAction SilentlyContinue
+})
+
+#===========================================================================
+# Enable Account
+#===========================================================================
+$WPFEnableAcc.Add_Click({
+
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') | Out-Null
+$EnableAcc= [Microsoft.VisualBasic.Interaction]::InputBox("Enter a user name", "Name", "$env:username")
+            
+Enable-ADAccount $EnableAcc -Server "########Domain########"
+#Enable-ADAccount -Server "########Domain########" $Username
+#Out-GridView "Account Set to Enabled"
+Clear-Variable * -ErrorAction SilentlyContinue
+})
+
+#===========================================================================
+# Unlock Account
+#===========================================================================
+$WPFUnlockAcc.Add_Click({
+
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') | Out-Null
+$UnlockAcc= [Microsoft.VisualBasic.Interaction]::InputBox("Enter a user name", "Name", "$env:username")
+            
+Unlock-ADAccount $UnlockAcc -Server "########Domain########"
+#Unlock-ADAccount -Server "########Domain########"
+Clear-Variable * -ErrorAction SilentlyContinue
+})
+
+#===========================================================================
+# Set Account Expiry
+#===========================================================================
+$WPFAccountExp.Add_Click({
+
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') | Out-Null
+$AccExp= [Microsoft.VisualBasic.Interaction]::InputBox("Enter a user name", "Name") 
+
+$form = New-Object Windows.Forms.Form 
+
+$form.Text = "Select a Date" 
+$form.Size = New-Object Drawing.Size @(243,230) 
+$form.StartPosition = "CenterScreen"
+
+$calendar = New-Object System.Windows.Forms.MonthCalendar 
+$calendar.ShowTodayCircle = $False
+$calendar.MaxSelectionCount = 1
+$form.Controls.Add($calendar) 
+
+$OKButton = New-Object System.Windows.Forms.Button
+$OKButton.Location = New-Object System.Drawing.Point(38,165)
+$OKButton.Size = New-Object System.Drawing.Size(75,23)
+$OKButton.Text = "OK"
+$OKButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+$form.AcceptButton = $OKButton
+$form.Controls.Add($OKButton)
+
+$CancelButton = New-Object System.Windows.Forms.Button
+$CancelButton.Location = New-Object System.Drawing.Point(113,165)
+$CancelButton.Size = New-Object System.Drawing.Size(75,23)
+$CancelButton.Text = "Cancel"
+$CancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+$form.CancelButton = $CancelButton
+$form.Controls.Add($CancelButton)
+
+$form.Topmost = $True
+
+$result = $form.ShowDialog() 
+
+if ($result -eq [System.Windows.Forms.DialogResult]::OK)
+{
+    $date = $calendar.SelectionStart
+    Write-Host "Date selected: $($date.ToShortDateString())"
+}
+Set-ADAccountExpiration $AccExp -DateTime $date
+Clear-Variable * -ErrorAction SilentlyContinue
+})
+
+#===========================================================================
+# Check All Locked Accounts
+#===========================================================================
+$WPFCheckLock.Add_Click({
+
+Search-ADAccount -LockedOut | Select Name, LockedOut, LastLogonDate | Out-GridView
+Clear-Variable * -ErrorAction SilentlyContinue})
+
+#===========================================================================
+# Account Name Change
+#===========================================================================
+$WPFCheckLock.Add_Click({
+
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') | Out-Null
+$AccountName= [Microsoft.VisualBasic.Interaction]::InputBox("Enter a user name (Including @Domain)", "Name", "$env:username")
+
+set-aduser -UserPrincipalName $AccountName
+Clear-Variable})
+
+#===========================================================================
+# Leavers
+#===========================================================================
+$WPFLeavers.Add_Click({Import-Module activedirectory
+#Connect-MsolService
+
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') | Out-Null
+$Accleave= [Microsoft.VisualBasic.Interaction]::InputBox("Enter a user name", "Name")
+
+$form = New-Object Windows.Forms.Form 
+
+$form.Text = "Select a Date" 
+$form.Size = New-Object Drawing.Size @(243,230) 
+$form.StartPosition = "CenterScreen"
+
+$calendar = New-Object System.Windows.Forms.MonthCalendar 
+$calendar.ShowTodayCircle = $False
+$calendar.MaxSelectionCount = 1
+$form.Controls.Add($calendar) 
+
+$OKButton = New-Object System.Windows.Forms.Button
+$OKButton.Location = New-Object System.Drawing.Point(38,165)
+$OKButton.Size = New-Object System.Drawing.Size(75,23)
+$OKButton.Text = "OK"
+$OKButton.DialogResult = [System.Windows.Forms.DialogResult]::OK
+$form.AcceptButton = $OKButton
+$form.Controls.Add($OKButton)
+
+$CancelButton = New-Object System.Windows.Forms.Button
+$CancelButton.Location = New-Object System.Drawing.Point(113,165)
+$CancelButton.Size = New-Object System.Drawing.Size(75,23)
+$CancelButton.Text = "Cancel"
+$CancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
+$form.CancelButton = $CancelButton
+$form.Controls.Add($CancelButton)
+
+$form.Topmost = $True
+
+$result = $form.ShowDialog()  
+
+if ($result -eq [System.Windows.Forms.DialogResult]::OK)
+{
+    $date = $calendar.SelectionStart
+}
+Set-ADAccountExpiration $Accleave -DateTime $date
+Disable-ADAccount $Accleave
+Set-MsolUserLicense -UserPrincipalName "$LeaverName@@########Domain########" -RemoveLicenses "COMPANYNAME:ENTERPRISEPACK"
+Write-Host "User Now ########Domain######## History"
+Get-MsolUser -UserPrincipalName Powershell.test@########Domain########
+})
+
+#===========================================================================
+# Account Information
+#===========================================================================
+$WPFAccountInfo.Add_Click({get-aduser
+            })
+
+#===========================================================================
+# Add User To Shared Mailbox
+#==========================================
+
+#            })
+
+#============================================================================================================
+#INFORMATION SCRIPTS
+#============================================================================================================
+
+#===========================================================================
+# Get Computer Information
+#===========================================================================
+$WPFGetCompInfo.Add_Click({
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') | Out-Null
+$ArrComputers =  [Microsoft.VisualBasic.Interaction]::InputBox("Enter a computer name", "Computer") 
+foreach ($Computer in $ArrComputers)
+{
+    $computerSystem = get-wmiobject Win32_ComputerSystem -Computer $Computer
+    $computerBIOS = get-wmiobject Win32_BIOS -Computer $Computer
+    $computerOS = get-wmiobject Win32_OperatingSystem -Computer $Computer
+    $computerCPU = get-wmiobject Win32_Processor -Computer $Computer
+    $computerHDD = Get-WmiObject Win32_LogicalDisk -ComputerName $Computer -Filter drivetype=3
+    $ComputerSoftware = Get-WmiObject -Class Win32_Product -ComputerName $Computer | Select-Object -Property Name, version
+ $ComputerMAC = Get-WmiObject win32_networkadapterconfiguration -ComputerName $Computer | select description, macaddress
+    "-------------------------------------------------------"
+ write-host "System Information for: " $computerSystem.Name -foregroundcolor "Green" -BackgroundColor "Black"
+        "-------------------------------------------------------"
+        "Manufacturer: " + $computerSystem.Manufacturer
+        "Model: " + $computerSystem.Model
+        "Serial Number: " + $computerBIOS.SerialNumber
+        "CPU: " + $computerCPU.Name
+        "HDD Capacity: "  + "{0:N2}" -f ($computerHDD.Size/1GB) + "GB"
+        "HDD Space: " + "{0:P2}" -f ($computerHDD.FreeSpace/$computerHDD.Size) + " Free (" + "{0:N2}" -f ($computerHDD.FreeSpace/1GB) + "GB)"
+        "RAM: " + "{0:N2}" -f ($computerSystem.TotalPhysicalMemory/1GB) + "GB"
+        "Operating System: " + $computerOS.caption + ", Service Pack: " + $computerOS.ServicePackMajorVersion
+        "User logged In: " + $computerSystem.UserName
+        "Last Reboot: " + $computerOS.ConvertToDateTime($computerOS.LastBootUpTime)
+        "-------------------------------------------------------"
+ Write-host "Installed Software" -Foregroundcolor "Green" -Backgroundcolor "Black"
+ $ComputerSoftware 
+ "---------------------------------------------------------------"
+ write-host "Networking Information" -Foregroundcolor "Green" -Backgroundcolor "Black"
+ #Formatting Header
+ "{0,-20} {1,-30}" -f "MacAddress","Description"
+ "{0,-20} {1,-30}" -f "----------","-----------"
+ #Looping through all the data
+ foreach ($MAC in $ComputerMAC){ "{0,-20} {1,-30}" -f $MAC.MacAddress,$MAC.Description }
+ Out-Gridview
+ "---------------------------------------------------------------"
+}
+            })
+
+#===========================================================================
+# Check Microsoft Licenses
+#===========================================================================
+$WPFCheckMSLicenses.Add_Click({
+Get-MsolAccountSku | where {$_.AccountSkuId -eq '<AccountSkuId>'.ServiceStatus}
+})
+
+#===========================================================================
+# Get Mailbox GUID
+#===========================================================================
+$WPFMbxGUID.Add_Click({
+$usercredential = get-credential
+$Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Credential $UserCredential -Authentication Basic -AllowRedirection
+Import-PSSession $Session
+
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') | Out-Null
+$GUID= [Microsoft.VisualBasic.Interaction]::InputBox("Enter a user name", "Name")
+
+Get-Mailbox -identity $GUID | Fl Name,ExchangeGUID | out-string
+            })
+
+#===========================================================================
+# Find Empty Groups
+#===========================================================================
+$WPFEmptyGrps.Add_Click({
+Get-ADGroup -Filter * -Properties Members | Select Name | where { $_.Members.Count -eq 0 } | Out-GridView
+})
+
+#===========================================================================
+# Get Members Of Groups
+#===========================================================================
+$WPFGrpMembers.Add_Click({
+
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') | Out-Null
+$Group= [Microsoft.VisualBasic.Interaction]::InputBox("Enter a Group Name", "Name")
+
+$OUTPUT= [System.Windows.Forms.MessageBox]::Show("Would you like to export the results to your desktop?" , "Status" , 4) 
+if ($OUTPUT -eq "YES" )
+{
+Get-ADGroupMember $Group | select Name |Out-GridView | Export-csv $home\Desktop\"$Group"members.csv -NoTypeInformation
+Clear-Variable * -ErrorAction SilentlyContinue
+}
+else
+{
+Get-ADGroupMember $Group | select Name |Out-GridView
+Clear-Variable * -ErrorAction SilentlyContinue
+}})
+#===========================================================================
+# Import Accounts To Group
+#===========================================================================
+$WPFImportAccsGrp.Add_Click({
+
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') | Out-Null
+$ImportAcc= [Microsoft.VisualBasic.Interaction]::InputBox("Enter a Group Name to export users to", "Name")
+
+$OUTPUT= [System.Windows.Forms.MessageBox]::Show("Please Save CSV as C:\users.csv and Hit OK", "Status" , 1) 
+if ($OUTPUT -eq "OK" )
+{
+Import-CSV "C:\Users.csv" | % 
+Add-ADGroupMember -Identity $ImportAcc -Member $_.UserName 
+}
+else
+{
+}})
+
+#===========================================================================
+# Get Users Manager
+#===========================================================================
+$WPFGetmanager.add_click({
+
+[System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic') | Out-Null
+$UserManager= [Microsoft.VisualBasic.Interaction]::InputBox("Enter a user name", "Name")
+
+Get-ADUser $UserManager -Properties Displayname, Title, Manager |
+Select-Object -Property Displayname, Title, @{Name='Line Manager' ;expression={$_.Manager -replace '^CN=|,.*$'}} | Out-GridView 
+Clear-Variable * -ErrorAction SilentlyContinue})
+#===========================================================================
+# Close the form
+#===========================================================================
+            
+$WPFExit.add_click({
+$Form.Close()
+})
+
+#===========================================================================
+# Shows the form
+#===========================================================================
+write-host "To show the form, run the following" -ForegroundColor Cyan
+$Form.ShowDialog() | out-null
