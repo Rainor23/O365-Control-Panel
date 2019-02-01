@@ -1,0 +1,29 @@
+# O365-Control-Panel
+
+This is a powershell script with a GUI containing the following user administrator commands -
+Disable Account
+Reset Password
+Enable Account
+Unlock Account
+Set Account Expiry
+Check All Locked Accounts
+Account Name Change
+Leavers
+Account Information
+Add User To Shared Mailbox
+Get Computer Information
+Check Microsoft Licenses
+Get Mailbox GUID
+Find Empty Groups
+Get Members Of Groups
+Import Accounts To Group
+Get Users Manager
+
+# To be completed -
+Account Name Change
+Add User To Shared Mailbox
+
+find and replace all ########Domain######## with your domain.
+
+
+I do not take any responsability for the use of this powershell, please make sure to test scripts on a test environment before use.
